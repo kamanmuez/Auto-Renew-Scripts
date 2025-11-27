@@ -24,6 +24,12 @@ jobs:
         token: ${{ secrets.PRIVATE_REPO_TOKEN }}
         path: scripts
     
+    - name: Set up WARP
+      uses: fscarmen/warp-on-actions@v1.4
+      with:
+        stack: dual
+        mode: wireguard
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
