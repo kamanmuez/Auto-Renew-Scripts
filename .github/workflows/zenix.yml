@@ -45,22 +45,6 @@ jobs:
         working-directory: scripts
         run: python main.py
       
-      - name: Display execution result
-        if: always()
-        run: |
-          echo "续期任务执行完成"
-          echo "时间: $(date)"
-          echo "工作流: ${{ github.workflow }}"
-          echo "运行ID: ${{ github.run_id }}"
-      
-      - name: Send notification on failure
-        if: failure()
-        run: |
-          echo "续期失败，请检查日志"
-          echo "时间: $(date)"
-          echo "工作流: ${{ github.workflow }}"
-          echo "运行ID: ${{ github.run_id }}"
-      
       - name: Clean up old workflow runs
         uses: MajorScruffy/delete-old-workflow-runs@v0.3.0
         env:
