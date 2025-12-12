@@ -37,9 +37,8 @@ jobs:
           GREATHOST_PASS: ${{ secrets.GREATHOST_PASS }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          cd scripts
-          python main.py
+        working-directory: scripts
+        run: python main.py
 
       - name: Clean up old workflow runs
         uses: MajorScruffy/delete-old-workflow-runs@v0.3.0
