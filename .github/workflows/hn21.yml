@@ -6,8 +6,10 @@ on:
 jobs:
   start-server:
     runs-on: ubuntu-latest
+    
     permissions:
       actions: write
+    
     steps:
       - name: Checkout private script repository
         uses: actions/checkout@v4
