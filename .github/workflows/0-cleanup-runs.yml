@@ -1,4 +1,4 @@
-name: Cleanup Workflow Runs
+name: A Cleanup Workflow Runs
 
 on:
   # 每 2 天凌晨 3 点清理
