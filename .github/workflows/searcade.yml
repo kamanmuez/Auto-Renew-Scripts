@@ -6,6 +6,10 @@ on:
     - cron: '0 12 * * 5'
   workflow_dispatch:  # 允许手动触发
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   login:
     runs-on: ubuntu-22.04
@@ -52,3 +56,12 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TZ: Asia/Shanghai
         run: python main.py
+      
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ github.run_number }}
+          path: scripts/*.png
+          retention-days: 7
+          if-no-files-found: ignore
