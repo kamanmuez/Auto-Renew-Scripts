@@ -19,14 +19,6 @@ jobs:
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           path: scripts
 
-      - name: Set up WARP
-        continue-on-error: true
-        timeout-minutes: 3
-        uses: fscarmen/warp-on-actions@v1.4
-        with:
-          stack: dual
-          mode: wireguard
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -34,13 +26,14 @@ jobs:
 
       - name: Install dependencies
         working-directory: scripts
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt -q > /dev/null 2>&1
 
       - name: Run script
         working-directory: scripts
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SOCKS_PROXY_URL: ${{ secrets.SOCKS_PROXY_URL }}
         run: python main.py
 
       - name: Upload screenshots
